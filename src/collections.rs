@@ -6,7 +6,6 @@ use std::fmt::Debug;
 // an un-orderded linked list 
 // doc to go here in future
 #[derive(Debug)]
-// #[derive(Debug, Copy, Clone)] // for unboxing
 pub struct LinkedList<T: Debug> {
    pub val: T, 
    pub next: Option<Box<LinkedList<T>>>
@@ -25,6 +24,37 @@ impl <T: Debug> LinkedList<T> {
         match &self.next {
             Some(t) => 1 + t.size(), 
             _ => 1
+        }
+    }
+
+    // converts & returns the contents of the list with the supplied
+    // delim as the separator
+    pub fn to_string_with_delim(&self, delim: char) -> String {
+        match &self.next {
+            Some(t) => {
+                let sub = t.to_string_with_delim(delim);
+                let sub = sub.as_str(); // shadowed 
+                let mut s = String::from(format!("{:?}",self.val)); 
+                s.push(delim);
+                s.push_str(sub); 
+                s
+            } 
+            _ =>  String::from(format!("{:?}",self.val))
+        }
+    }
+
+        // converts & returns the contents of the list with the supplied
+    // delim as the separator
+    pub fn to_string(&self) -> String {
+        match &self.next {
+            Some(t) => {
+                let sub = t.to_string();
+                let sub = sub.as_str(); // shadowed 
+                let mut s = String::from(format!("{:?}",self.val)); 
+                s.push_str(sub); 
+                s
+            } 
+            _ =>  String::from(format!("{:?}",self.val))
         }
     }
  

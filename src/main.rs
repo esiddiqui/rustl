@@ -11,4 +11,11 @@ fn main() {
     }
     list.print_all();
 
+
+    let mut list = LinkedList::new("e");
+    list.insert("h");
+    list.insert("t");
+    list.insert("e");
+    list.insert("sham");
+    println!("{:?}", list.to_string())
 }
