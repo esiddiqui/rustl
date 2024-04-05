@@ -14,7 +14,7 @@ This repository holds a collection of containers, data structure & algorithms; s
     list.insert('t');
     list.insert('l');
 
-    println!("{}",list.to_string('').as_str());
+    println!("{}",list.to_string().as_str());
 
   :
 
