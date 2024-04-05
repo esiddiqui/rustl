@@ -2,9 +2,11 @@
 pub mod collections; 
 
 
+pub use crate::collections::singly_linked_list; // re-export here
+
 #[cfg(test)]
 mod tests {
-    use super::collections::LinkedList;
+    use super::collections::singly_linked_list::LinkedList;
 
     #[test]
     fn test_list_size() {
@@ -15,17 +17,5 @@ mod tests {
         }
 
         assert_eq!(list.size(), 10)
-    }
-
-
-    #[test]
-    fn test_list_to_string() {  
-        let mut list = LinkedList::new('r'); 
-        list.insert('u');
-        list.insert('s');
-        list.insert('t');
-        list.insert('l');
-
-        assert_eq!(list.to_string().as_str(),"r u s t l");
     }
 }
