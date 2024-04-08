@@ -1,12 +1,10 @@
 
 use rustl::collections::singly_linked_list::LinkedList as InnerLL; // this is using the actual path 
-use rustl::collections::{Set, LinkedList}; // this is the exported path
+use rustl::collections::LinkedList; // this is the exported path
 
 
 
 fn main() {
-
-    let mut _set =  Set::new('a');
     let mut list = LinkedList::new(0); 
     let mut list2: InnerLL<String> = LinkedList::new(String::from("ehtesham"));
     let list3: Option<LinkedList<f32>> =   LinkedList::new_empty(); 
