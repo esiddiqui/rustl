@@ -18,8 +18,7 @@ fn main() {
     list.print_all();
 
 
-
-
+    // play with list3
     list2.insert(String::from("sonia"));
     println!("{:?}", list2.to_string());
 

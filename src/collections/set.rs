@@ -4,12 +4,14 @@ use std::fmt::Debug;
 // implemented using https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
 // doc to go here in future
 
+
+/// a set data structure 
+/// this is not implemented yet 
 #[derive(Debug)]
 pub struct Set<T: Debug> {
    pub val: T, 
    pub next: Option<Box<Set<T>>>
 }
-
 
 impl <T: Debug> Set<T> {
 

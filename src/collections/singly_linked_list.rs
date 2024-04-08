@@ -1,7 +1,21 @@
+// use core::panic;
 use std::fmt::Debug;
+// use std::vec::Vec;
 
-// an un-orderded linked list 
-// doc to go here in future
+/// A singly linked-list 
+/// #Examples 
+/// ```
+///   use rustl::collections::LinkedList; 
+/// 
+///   let mut list = LinkedList::new('r'); 
+///           
+///    list.insert('u');
+///    list.insert('s');
+///    list.insert('t');
+///    list.insert('l');
+/// 
+///   assert_eq!(list.to_string().as_str(),"'r''u''s''t''l'");
+/// ```
 #[derive(Debug)]
 pub struct LinkedList<T: Debug> {
    pub val: T, 
@@ -22,6 +36,12 @@ impl <T: Debug> LinkedList<T> {
         LinkedList{val: head, next: None}
     }
 
+
+    // return true if the shit is empty
+    pub fn is_empty(&self) -> bool {
+        self.size() == 0 
+    }
+
     // returns the current count of items in the list
     pub fn size(&self) -> u32 {
         match &self.next {
@@ -29,6 +49,40 @@ impl <T: Debug> LinkedList<T> {
             _ => 1
         }
     }
+
+    // pub fn to_array(&self) -> Vec<T> {
+        
+    //     if self.size() == 0 {
+    //         return vec![];
+    //     }
+
+    //     let v = vec![self.size()];
+    //     for i in 0..=self.size()-1 {
+    //         match self.item_at(i) {
+    //             Some(t) => v.push(t.to_owned()),
+    //             _ => panic!("something went terribly wrong, looking at index ")
+    //         }
+    //         v.push(self.item_at(i))
+    //     }
+        
+
+    //     return &arr 
+    // }
+
+        // returns an Option of &T to item at index 
+    // pub fn item_at(&self, index: u32) -> Option<&T> {
+
+    //     if self.is_empty() {
+    //         return None
+    //     }
+
+    //     match index {
+    //         0 => return Some(&self.val), 
+    //         _ => return self.item_at(index - 1)
+    //     }
+    // }
+
+
 
     // converts & returns the contents of the list with the supplied
     // delim as the separator
@@ -61,6 +115,7 @@ impl <T: Debug> LinkedList<T> {
         }
     }
  
+    // TODO: remove this 
     // print_all prints all contents to std::out
     pub fn print_all(&self) {
        println!("{:?}",self.val);
@@ -85,6 +140,26 @@ impl <T: Debug> LinkedList<T> {
             }
         }
     }
+
+    // alias for insert(T)
+    pub fn append(&mut self, val: T) {
+        self.insert(val)
+    }
+
+
+    // // inserts the suppllied list at the end of the 
+    // // list
+    // pub fn insert_list(&mut self, other: LinkedList<T>) {
+    //     for t in other {
+    //         self.insert(t)
+    //     }
+    // }
+
+    // // alias for insert(LinkedList<T>)
+    // pub fn append_list(&mut self, other: LinkedList<T>) {
+    //     self.insert(other)
+    // }
+    
 
 }
 
