@@ -1,8 +1,7 @@
-// use core::panic;
 use std::fmt::Debug;
-// use std::vec::Vec;
 
 /// A singly linked-list 
+/// 
 /// #Examples 
 /// ```
 ///   use rustl::collections::LinkedList; 
