@@ -1,4 +1,6 @@
 
+use std::fmt::Pointer;
+
 use rustl::collections::singly_linked_list::LinkedList as InnerLL; // this is using the actual path 
 use rustl::collections::{List, LiNode, LinkedList}; // this is the exported path
 // use rustl::collections::List; // this is the exported path
@@ -40,7 +42,7 @@ fn main() {
         println!("oh yeah !!")
     }
 
-    let mut sz = li.append(3); 
+    let mut sz = li.append(4); 
     if !li.is_empty() {
         println!("not empty any more, great !!")
     } else {
@@ -53,7 +55,7 @@ fn main() {
         println!("yikes, the size should've been 1 at this point")
     }
 
-    sz = li.append(8); 
+    sz = li.append(5); 
     if !li.is_empty() {
         println!("not empty any more, great !!")
     } else {
@@ -69,7 +71,7 @@ fn main() {
 
 
     sz = li.append(6); 
-    sz = li.append(999);
+    sz = li.append(7);
     if sz == 4 {
         println!("hurray the size is also correct: size = {sz}")
     } else {
@@ -78,33 +80,32 @@ fn main() {
 
     li.trav(); 
 
+
+
+    println!("The size of this shit is {}", li.size());
+
+    li.append(8);
+    println!("The size of this shit is {}", li.size());
+    li.append(9);
+    println!("The size of this shit is {}", li.size());
+    li.append(10);
+    println!("The size of this shit is {}", li.size());
+
+    li.trav(); 
+    let vect = vec![11,12,13]; 
+    li.append_from(vect);
+    li.trav(); 
+    println!("The size of this shit is {}", li.size());
+
+
+
+    li.prepend(3);
+    li.prepend(2);
+    li.prepend(1);
+
     li.trav();
+    li.prepend_from(vec![0,-1,-2,-3,-4]);
 
-    println!("The size of this shit is {}", li.size());
-
-    li.append(89);
-    println!("The size of this shit is {}", li.size());
-    li.append(891);
-    println!("The size of this shit is {}", li.size());
-    li.append(893);
-    println!("The size of this shit is {}", li.size());
-
-
-    
-
-    // let li  : List<i32>  = List::<i32>::new();
-    // assert!(li.head==&LiNode::Nil);
-    // match li.head {
-    //     LiNode::Nil => println!("perfect, all good"),
-    //     _ => println! ("fuck this")
-    // }
-
-
-    // let list_head = &LiNode::Value{val:100, next:&LiNode::Nil};
-    // let li2 = List::new_with_head(list_head);
-    // match li2.head {
-    //     LiNode::Nil => println!("l12 is nil"), 
-    //     LiNode::Value{ref val , next: _} => println!("li2.head value is {}",*val)
-    // }
+    li.trav();
 
 }
