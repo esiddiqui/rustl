@@ -1,9 +1,9 @@
 
 // inner modules here
-pub mod singly_linked_list; 
-pub mod singly_linked_li;
+pub mod singly_linked_list_old; 
+pub mod singly_linked_list;
 
 
 // type re-exports here for external organization
-pub use singly_linked_list::LinkedList;
-pub use singly_linked_li::{List,LiNode};
+pub use singly_linked_list_old::LinkedList;
+pub use singly_linked_list::SinglyLinkedList;

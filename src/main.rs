@@ -1,11 +1,11 @@
 
-use std::fmt::Pointer;
+// use std::fmt::Pointer;
 
-use rustl::collections::singly_linked_list::LinkedList as InnerLL; // this is using the actual path 
-use rustl::collections::{List, LiNode, LinkedList}; // this is the exported path
+// use rustl::collections::singly_linked_list_old::LinkedList as InnerLL; // this is using the actual path 
+use rustl::collections::SinglyLinkedList as List; // this is the exported path
 // use rustl::collections::List; // this is the exported path
 
-
+// 
 
 fn main() {
     // let mut list = LinkedList::new(0); 
@@ -57,7 +57,7 @@ fn main() {
 
     sz = li.append(5); 
     if !li.is_empty() {
-        println!("not empty any more, great !!")
+        println!("not empty any more, great !! the size is {sz}")
     } else {
         println!("yikes, somethings wrong, shouldn't be empty now");
     }
@@ -70,7 +70,7 @@ fn main() {
     }
 
 
-    sz = li.append(6); 
+    li.append(6); 
     sz = li.append(7);
     if sz == 4 {
         println!("hurray the size is also correct: size = {sz}")
