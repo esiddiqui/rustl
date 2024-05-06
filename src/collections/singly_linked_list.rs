@@ -39,9 +39,9 @@ pub struct Node<T:Debug> {
 /// 
 /// Example 
 /// ```
-///   use rustl::collections::SinglyLinkedList; 
+///   use rustl::collections::SinglyLinkedList as List; 
 /// 
-///   let mut list = rustl::collections::SinglyLinkedList::new();
+///   let mut list = List::new();
 ///   list.append(1); 
 ///   list.prepend(0); 
 ///   assert_eq!(list.size(),2);   
@@ -74,7 +74,6 @@ impl<T:Debug> SinglyLinkedList<T> {
         }
         false
     }
-
 
     /// append adds the supplied value at the end of the 
     /// list. If the list is_empty(), i.e head is None, then 
@@ -143,8 +142,6 @@ impl<T:Debug> SinglyLinkedList<T> {
         }
     }
 
-    
-
     /// prepend adds the new value to the front of the queue.
     ///  
     /// if prepend is called on an empty list, it behaves the same
@@ -183,8 +180,6 @@ impl<T:Debug> SinglyLinkedList<T> {
     }
 
 
-
-
     //// returns the current size of the list
     pub fn size(&self) ->i32 {
         return self.size;
@@ -220,6 +215,46 @@ impl<T:Debug> SinglyLinkedList<T> {
     //     ptr = Some(ele);
     //     ptr_cpy
     // }
+
+
+    /// delete always removes the item at the head of the list. 
+    /// 
+    /// - if the list is empty, this is a no-op.
+    /// 
+    /// - if the list has 1 element, both head & curr will point to None
+    ///   & the head will be removed. 
+    /// 
+    /// - if the list has more than 1 element, the head  is removed & heads
+    ///   points to the next item in the node
+    /// 
+    ///  Example: 
+    ///  ```
+    ///   use rustl::collections::SinglyLinkedList as List; 
+    /// 
+    ///   let mut list = List::new();
+    ///     list.append_from(vec![-1,0,1,2,3,4,5,6,7,8]); 
+    ///     list.delete();  // delete node -1
+    ///     list.delete();  // delete node 0
+    ///     assert_eq!(list.size(),8);
+    ///  ```
+    pub fn delete(&mut self) -> i32 {
+
+        if self.is_empty() {
+            return 0
+        } else if self.size == 1 {
+            let _ = mem::take(&mut self.head); // take head
+            let _ = mem::take(& mut self.curr); // take curr
+            self.size -= 1;
+        } else {
+            let to_be_deleted = mem::take(&mut self.head); // take head, detached head here
+            if let Some(inner) = to_be_deleted  {
+                mem::swap(&mut inner.borrow_mut().next, &mut self.head) // point head to to_be_deleted.next
+            }
+            self.size -=1;
+        }
+        self.size
+
+    }
 
 
     /// a temporary testing method 
