@@ -87,7 +87,7 @@ impl<T:Debug> SinglyLinkedList<T> {
     /// 
     /// Returns the new size of the list
     /// 
-    pub fn append(&mut self, value: T) -> i32 {
+    pub fn append2(&mut self, value: T) -> i32 {
 
         // we make a new node and put the value in it, next is None; 
         let node = Node{value: value, next: None};
@@ -138,9 +138,28 @@ impl<T:Debug> SinglyLinkedList<T> {
             self.size = self.size + 1; 
 
             return self.size
-
         }
     }
+
+    /// append adds the supplied value at the end of the list.
+    pub fn append(&mut self, value: T) -> i32 {
+
+        let node = Node{value: value, next:None}; 
+        let ele = Rc::new(RefCell::new(node));
+
+        if let None = self.head {
+            self.curr = Some(Rc::clone(&ele)); // point curr to ele
+            self.head = Some(ele);  // point head to ele
+            self.size += 1 // incr size
+        } else {
+            let mut copy = Some(Rc::clone(&ele));
+            mem::swap(&mut self.curr,  &mut copy); // swap curr & copy 
+            mem::swap(&mut copy.unwrap().borrow_mut().next, &mut Some(ele));
+            self.size +=1; 
+        }
+        return self.size // new size 
+    }
+
 
     /// prepend adds the new value to the front of the queue.
     ///  
@@ -153,17 +172,14 @@ impl<T:Debug> SinglyLinkedList<T> {
     /// 
     pub fn prepend(&mut self, value:T) -> i32 {
 
-         // we make a new node and put the value in it, next is None; 
-         let node = Node{value: value, next: None};
-         // wrap it up inside an Rc/RefCell
-         let ele = Rc::new(RefCell::new(node)); 
- 
          if self.is_empty() {
-             self.curr = Some(Rc::clone(&ele)); // curr ->rc clone 
-             self.head = Some(ele); //head -> rc
-             self.size += 1; // size++
-             return self.size
+            return self.append(value);
          } else {
+
+             // we make a new node and put the value in it, next is None; 
+        let node = Node{value: value, next: None};
+        // wrap it up inside an Rc/RefCell
+        let ele = Rc::new(RefCell::new(node)); 
 
             // new_ele & new_ele_clone now
             let mut new_ele_clone = Some(Rc::clone(&ele)); 
@@ -207,16 +223,6 @@ impl<T:Debug> SinglyLinkedList<T> {
         sz
     }
 
-
-    /// internal helper to clone a pointers internal RefCell ref
-    // pub fn ptr_copy(mut ptr :Pointer<T>) -> Pointer<T> {
-    //     let ele = mem::take(&mut ptr).unwrap();  //TODO: deal with panic
-    //     let ptr_cpy = Some(Rc::clone(&ele));
-    //     ptr = Some(ele);
-    //     ptr_cpy
-    // }
-
-
     /// delete always removes the item at the head of the list. 
     /// 
     /// - if the list is empty, this is a no-op.
@@ -253,9 +259,29 @@ impl<T:Debug> SinglyLinkedList<T> {
             self.size -=1;
         }
         self.size
-
     }
 
+
+
+    /// a temporary testing method 
+    /// to walk the list & print each item
+    pub fn trav2(&self) {
+        println!("----------- trav2 list -----------");
+        if let Some(ref h) = self.head {
+            let mut walker = Some(Rc::clone(h)); 
+            // let mut done = false; 
+            while let Some(ele) = walker {
+                println!("{:?}",&ele.borrow().value);
+                if let Some(next) = &ele.borrow().next {
+                    walker = Some(Rc::clone(&next))
+
+                } else {
+                    walker = None;
+                }
+            }
+        }
+        println!("----- --------- ------");
+    }
 
     /// a temporary testing method 
     /// to walk the list & print each item
@@ -281,9 +307,16 @@ impl<T:Debug> SinglyLinkedList<T> {
                 }
             }
         }
-
         println!("----- --------- ------");
     }
+
+    // internal helper to clone a pointers internal RefCell ref
+    // pub fn ptr_copy(mut ptr :Pointer<T>) -> Pointer<T> {
+    //     let ele = mem::take(&mut ptr).unwrap();  //TODO: deal with panic
+    //     let ptr_cpy = Some(Rc::clone(&ele));
+    //     ptr = Some(ele);
+    //     ptr_cpy
+    // }
 
 }
 
