@@ -58,6 +58,7 @@ where
 }
 
 impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
+    
     /// creaes a new List with the head & curr pointers
     /// pointing to None (nil) & the size initialized to 0
     pub fn new() -> SinglyLinkedList<T> {
@@ -93,7 +94,10 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
     /// instead.
     ///
     /// Returns the new size of the list
-    ///
+    /// 
+    /// Example: 
+    /// ```
+    /// ```   
     pub fn append(&mut self, value: T) -> i32 {
         let ele = Rc::new(RefCell::new(Node {
             value: value,
@@ -121,6 +125,10 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
     /// if the list was not empty, the new node with the value is
     /// added to the front of the queue, front points to it, the
     /// previous head is then pointed by front->next.
+    /// 
+    /// Example: 
+    /// ```
+    /// ```
     pub fn prepend(&mut self, value: T) -> i32 {
         if let None = self.head {
             return self.append(value); // when list is empty, prepend is the same as append
