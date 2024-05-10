@@ -99,33 +99,68 @@ fn main() {
 
     // li.trav();
 
-    let name = String::from("Ehtesham Siddiqui");
-    let mut buff = List::new();
-    for chr in name.chars() {
-        buff.append(chr);
-    }
+    // let name = String::from("Ehtesham Siddiqui");
+    // let mut buff = List::new();
+    // for chr in name.chars() {
+    //     buff.append(chr);
+    // }
+    // buff.trav2();
 
     let mut bff2 = List::new();
+
+    bff2.prepend('z');
+    bff2.trav();
+    println!("{}", bff2.size());
+    bff2.delete();
+    bff2.trav();
+    println!("{}", bff2.size());
+
     bff2.append_from(vec!['k', 'z', 'e', 'h', 't', 'e', 's', 'h', 'a', 'm']);
-
     bff2.trav();
     println!("{}", bff2.size());
 
-    bff2.delete();
-    bff2.delete();
+    bff2.delete(); // delete k
+    bff2.delete(); // delete z
 
-    bff2.trav();
-    println!("{}", bff2.size());
+    bff2.trav(); // should be ehtesham again
+    println!("{}", bff2.size()); // size = 8
 
     bff2.prepend(' ');
     bff2.prepend('.');
     bff2.prepend('r');
-    bff2.prepend('m');
+    bff2.prepend('m'); // should be "mr. ehtesham" now
 
+    bff2.append(' ');
+    bff2.append_from(vec!['s', 'i', 'd', 'd', 'i', 'q', 'u', 'i']);
     bff2.trav();
-    bff2.trav2();
-    println!("{}", bff2.size());
+    println!("{}", bff2.size()); // size = 8
 
-    bff2.append2('r'); 
-    bff2.trav2();
+    bff2.delete();
+    bff2.delete();
+    bff2.delete();
+    bff2.delete();
+
+    while let Some(c) = bff2.take() {
+        print!("{:?}", c);
+    }
+    println!("");
+    bff2.trav();
+
+    bff2.append('A');
+    bff2.append('B');
+    bff2.trav();
+
+    bff2.take();
+    bff2.trav();
+    bff2.prepend('H');
+    bff2.append('C');
+    bff2.trav();
+
+    bff2.map(|v| println!("tatastic {}", v));
+
+    let mut inties = List::new(); 
+    inties.append_from(vec![1,2,3,4,5]);
+    inties.map(|v| print!("{},", v*2));
+    println!("\n");
+
 }
