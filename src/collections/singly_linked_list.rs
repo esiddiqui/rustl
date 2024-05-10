@@ -58,7 +58,7 @@ where
 }
 
 impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
-    
+
     /// creaes a new List with the head & curr pointers
     /// pointing to None (nil) & the size initialized to 0
     pub fn new() -> SinglyLinkedList<T> {
@@ -180,6 +180,16 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
 
     /// append_from appends all items from the supplied Vec<T>
     /// the vec<t> is moved here;
+    /// 
+    /// Example:
+    /// ```
+    ///   use rustl::collections::SinglyLinkedList as List;
+    ///
+    ///   let mut list = List::new();
+    ///   list.append_from(vec![0,2,3]);  // list is 0,2,3
+    ///   assert_eq!(list.size(),3);             
+    ///   assert_eq!(list.take(),Some(0)); // head is 0
+    /// ```
     pub fn append_from(&mut self, values: Vec<T>) -> i32 {
         let mut sz: i32 = 0;
         for v in values {
@@ -190,6 +200,16 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
 
     /// prepend_from appends all items from the supplied Vec<T>
     /// the vec<t> is moved here;
+    /// 
+    /// Example:
+    /// ```
+    ///   use rustl::collections::SinglyLinkedList as List;
+    ///
+    ///   let mut list = List::new();
+    ///   list.prepend_from(vec![0,2,3]);  // list is 3,2,0
+    ///   assert_eq!(list.size(),3);             
+    ///   assert_eq!(list.take(),Some(3)); // head is 3
+    /// ```
     pub fn prepend_from(&mut self, values: Vec<T>) -> i32 {
         let mut sz: i32 = 0;
         for v in values {
