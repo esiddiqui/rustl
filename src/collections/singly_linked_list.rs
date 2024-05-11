@@ -97,6 +97,14 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
     /// 
     /// Example: 
     /// ```
+    ///   use rustl::collections::SinglyLinkedList as List;
+    ///
+    ///   let mut list = List::new();
+    ///   list.prepend(1); 
+    ///   assert_eq!(list.size(),1); // size is 1             
+    ///   list.prepend(2);
+    ///   assert_eq!(list.size(), 2); // size is 2
+    ///   assert_eq!(list.take().unwrap(),2) // take returns 2
     /// ```   
     pub fn append(&mut self, value: T) -> i32 {
         let ele = Rc::new(RefCell::new(Node {
@@ -128,6 +136,14 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
     /// 
     /// Example: 
     /// ```
+    ///   use rustl::collections::SinglyLinkedList as List;
+    ///
+    ///   let mut list = List::new();
+    ///   list.prepend(1); 
+    ///   assert_eq!(list.size(),1); // size is 1             
+    ///   list.prepend(2);
+    ///   assert_eq!(list.size(), 2); // size is 2
+    ///   assert_eq!(list.take().unwrap(),2) // take returns 2
     /// ```
     pub fn prepend(&mut self, value: T) -> i32 {
         if let None = self.head {
@@ -272,9 +288,8 @@ impl<T: Debug + Clone + std::fmt::Display> SinglyLinkedList<T> {
         let detached_head = mem::take(&mut self.head); // detach head
         if let Some(ref detached_head_rc) = detached_head {
             mem::swap(&mut detached_head_rc.borrow_mut().next, &mut self.head); // point head to detachec head->next
-            let v = detached_head_rc.borrow();
             self.size -= 1;
-            let rc = Ref::map(v, |n| &n.value);
+            let rc = Ref::map(detached_head_rc.borrow(), |n| &n.value);
             return Some(rc.clone());
         }
         None
