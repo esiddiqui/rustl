@@ -7,6 +7,41 @@ use rustl::collections::SinglyLinkedList as List; // this is the exported path
 //
 
 fn main() {
+
+
+    let mut lilly = List::new(); 
+    lilly.append(101);
+    lilly.append(102);
+    for s in 0..=1000 {
+        lilly.append(s+103);
+    }
+
+
+    for l in lilly {
+        print!("{l},");
+    }
+
+   // println!("the size of the thing is {}", lilly.size());
+
+    // println!("list size={}", lilly.size());
+
+    // let a =  lilly.take();
+    // println!("list now after take {:?} {}",a, lilly.size());
+
+    // let a =  lilly.take();
+    // println!("list now after take {:?} {}",a, lilly.size());
+
+    // lilly.append_from(vec![1,2,3,4,5,6,7,8,9,10]);
+    // for num in lilly{
+    //     print!("{num}");
+    // }
+
+    // println!("list now after iteration {:?} {}",a, lilly.size());
+
+    if true {
+        return;
+    }
+
     // let mut list = LinkedList::new(0);
     // let mut list2: InnerLL<String> = LinkedList::new(String::from("ehtesham"));
     // let list3: Option<LinkedList<f32>> =   LinkedList::new_empty();
@@ -162,5 +197,26 @@ fn main() {
     inties.append_from(vec![1,2,3,4,5]);
     inties.map(|v| print!("{},", v*2));
     println!("\n");
+
+
+    let mut  bi = List::new();
+    bi.append_from(vec![0,0,0,0,0,1]);
+    let base :i32 = 2;
+    let mut  pow =0;
+    let mut  val :i32 =0;
+    bi.map(|e| { 
+        let powrr = base.pow(pow);
+        println!("{} * {} pow {}", e, 2,powrr);
+        val += e * powrr;
+        pow = pow + 1;
+    });
+
+    println!("the conversion to decimal is {val}");
+
+    // once we impl iterator, you can do this... 
+    for ele in bi {
+        println!("{}", ele);
+    }
+    
 
 }
